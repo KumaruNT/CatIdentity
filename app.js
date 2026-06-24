@@ -520,17 +520,17 @@ function calculateAndShowResult() {
   const catEmoji = document.getElementById('result-cat-emoji');
   
   catImg.classList.add('hidden');
-  catEmoji.classList.remove('hidden');
+  if (catEmoji) catEmoji.classList.remove('hidden');
   
   if (profile.breedId) {
     catImg.src = `images/cat_${profile.breedId}.png?v=${Date.now()}`;
     catImg.onload = () => {
       catImg.classList.remove('hidden');
-      catEmoji.classList.add('hidden');
+      if (catEmoji) catEmoji.classList.add('hidden');
     };
     catImg.onerror = () => {
       catImg.classList.add('hidden');
-      catEmoji.classList.remove('hidden');
+      if (catEmoji) catEmoji.classList.remove('hidden');
     };
   }
   
