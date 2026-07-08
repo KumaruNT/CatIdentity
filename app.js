@@ -772,8 +772,8 @@ function downloadResultImage() {
     html2canvas(wrapper, {
       useCORS: true,
       scale: 2, // High resolution (retina support)
-      logging: false,
-      allowTaint: true
+      logging: true, // Enable logging for debugging
+      allowTaint: false // Set to false to prevent canvas taint issues
     }).then(canvas => {
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
@@ -794,6 +794,7 @@ function downloadResultImage() {
       if (document.body.contains(wrapper)) {
         document.body.removeChild(wrapper);
       }
+      alert('เกิดข้อผิดพลาดในการบันทึกรูปภาพ:\n' + (err.stack || err));
       showToast(`เกิดข้อผิดพลาด: ${err.message || 'ไม่สามารถแปลงรูปภาพได้'} 😿`);
     });
   }, 150);
