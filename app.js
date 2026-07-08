@@ -592,7 +592,8 @@ function calculateAndShowResult() {
   if (catEmoji) catEmoji.classList.remove('hidden');
   
   if (profile.breedId) {
-    catImg.src = `images/cat_${profile.breedId}.png?v=${Date.now()}`;
+    const base64Src = typeof CAT_IMAGES !== 'undefined' ? CAT_IMAGES[`cat_${profile.breedId}`] : null;
+    catImg.src = base64Src || `images/cat_${profile.breedId}.png?v=${Date.now()}`;
     catImg.onload = () => {
       catImg.classList.remove('hidden');
       if (catEmoji) catEmoji.classList.add('hidden');
@@ -638,7 +639,8 @@ function calculateAndShowResult() {
   bestEmoji.classList.remove('hidden');
   
   if (bestProfile.breedId) {
-    bestImg.src = `images/cat_${bestProfile.breedId}.png?v=${Date.now()}`;
+    const base64Src = typeof CAT_IMAGES !== 'undefined' ? CAT_IMAGES[`cat_${bestProfile.breedId}`] : null;
+    bestImg.src = base64Src || `images/cat_${bestProfile.breedId}.png?v=${Date.now()}`;
     bestImg.onload = () => {
       bestImg.classList.remove('hidden');
       bestEmoji.classList.add('hidden');
@@ -663,7 +665,8 @@ function calculateAndShowResult() {
   worstEmoji.classList.remove('hidden');
   
   if (worstProfile.breedId) {
-    worstImg.src = `images/cat_${worstProfile.breedId}.png?v=${Date.now()}`;
+    const base64Src = typeof CAT_IMAGES !== 'undefined' ? CAT_IMAGES[`cat_${worstProfile.breedId}`] : null;
+    worstImg.src = base64Src || `images/cat_${worstProfile.breedId}.png?v=${Date.now()}`;
     worstImg.onload = () => {
       worstImg.classList.remove('hidden');
       worstEmoji.classList.add('hidden');
@@ -791,7 +794,7 @@ function downloadResultImage() {
       if (document.body.contains(wrapper)) {
         document.body.removeChild(wrapper);
       }
-      showToast('เกิดข้อผิดพลาดในการบันทึกรูปภาพ 😿');
+      showToast(`เกิดข้อผิดพลาด: ${err.message || 'ไม่สามารถแปลงรูปภาพได้'} 😿`);
     });
   }, 150);
 }
