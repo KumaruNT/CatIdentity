@@ -770,7 +770,7 @@ function downloadResultImage() {
   // Give it a brief moment to render styles
   setTimeout(() => {
     html2canvas(wrapper, {
-      useCORS: true,
+      useCORS: false, // Set to false to avoid local stylesheet CORS blocks on file:// protocol
       scale: 2, // High resolution (retina support)
       logging: true, // Enable logging for debugging
       allowTaint: false // Set to false to prevent canvas taint issues
@@ -785,7 +785,10 @@ function downloadResultImage() {
       
       link.download = filename;
       link.href = dataUrl;
+      link.style.display = 'none';
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
       
       document.body.removeChild(wrapper);
       showToast('ดาวน์โหลดรูปภาพสำเร็จแล้ว! 🐾');
