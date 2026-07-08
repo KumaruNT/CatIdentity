@@ -87,6 +87,66 @@ const questions = [
     questionText: 'สภาพโต๊ะทำงานหรือห้องนอนของคุณในปัจจุบัน บ่งบอกความเป็นคุณแบบใด?',
     optionA: { text: 'จัดวางอย่างเป็นระเบียบเรียบร้อย ของทุกอย่างอยู่ในที่ที่มันควรอยู่เพื่อง่ายต่อการใช้งาน', weight: 'J' },
     optionB: { text: 'กองๆ รวมกันไว้อย่างอิสระ อาจดูรกสำหรับคนอื่น แต่คุณรู้ดีว่าอะไรอยู่ตรงไหน', weight: 'P' }
+  },
+  // E vs I (Additional)
+  {
+    id: 13,
+    dimension: 'EI',
+    questionText: 'เวลาต้องการปรึกษาเรื่องสำคัญ คุณชอบคุยผ่านช่องทางใดมากกว่ากัน?',
+    optionA: { text: 'โทรศัพท์หรือนัดเจอคุยต่อหน้า ได้อารมณ์และเคลียร์กันได้ทันใจกว่า', weight: 'E' },
+    optionB: { text: 'พิมพ์แชทคุยกัน เพราะมีเวลาคิดทบทวนคำตอบและเรียบเรียงคำพูดก่อนส่ง', weight: 'I' }
+  },
+  {
+    id: 14,
+    dimension: 'EI',
+    questionText: 'ในขณะประชุมหรือทำงานกลุ่มเสนอไอเดียต่างๆ คุณมักจะมีท่าทีอย่างไร?',
+    optionA: { text: 'แชร์ความคิดของตนเองออกมาทันที มักพูดไปคิดไปอย่างรวดเร็วและลื่นไหล', weight: 'E' },
+    optionB: { text: 'นั่งฟังคนอื่นพูดวิเคราะห์ในใจเงียบๆ ก่อน แล้วค่อยพูดเมื่อคิดตกผลึกเสร็จแล้ว', weight: 'I' }
+  },
+  // S vs N (Additional)
+  {
+    id: 15,
+    dimension: 'SN',
+    questionText: 'เวลาประกอบเฟอร์นิเจอร์ หรือต้องทำอาหารตามสูตรใหม่ๆ คุณมักจะ...',
+    optionA: { text: 'เปิดคู่มือหรือสูตรทำตามคู่มือแบบทีละขั้นตอนอย่างละเอียดเพื่อความชัวร์', weight: 'S' },
+    optionB: { text: 'กะๆ เอาและลองประกอบ/ปรุงตามสัญชาตญาณ ค่อยๆ ปรับเปลี่ยนตามที่คิดว่าดี', weight: 'N' }
+  },
+  {
+    id: 16,
+    dimension: 'SN',
+    questionText: 'รูปแบบหนังสือ นิยาย หรือภาพยนตร์ที่คุณชื่นชอบและหยิบมาอ่าน/ดูบ่อยที่สุดคือ...',
+    optionA: { text: 'เรื่องราวอ้างอิงประวัติศาสตร์ สารคดีชีวิตจริง หรือแนวสืบสวนที่มีหลักฐานชัดเจน', weight: 'S' },
+    optionB: { text: 'แนวไซไฟ แฟนตาซี หรือผจญภัยในโลกจินตนาการเหนือธรรมชาติที่ตื่นตาตื่นใจ', weight: 'N' }
+  },
+  // T vs F (Additional)
+  {
+    id: 17,
+    dimension: 'TF',
+    questionText: 'ในการทำโปรเจกต์กลุ่ม หากมีเพื่อนร่วมทีมคนหนึ่งทำงานผิดพลาดและล่าช้า คุณจะ...',
+    optionA: { text: 'ชี้แจงจุดผิดและตักเตือนตรงๆ เพื่อความถูกต้องและคุณภาพงานเป็นสำคัญ', weight: 'T' },
+    optionB: { text: 'พูดคุยประนีประนอม รักษาน้ำใจ และเสนอตัวช่วยแชร์งานเพื่อประคองความรู้สึก', weight: 'F' }
+  },
+  {
+    id: 18,
+    dimension: 'TF',
+    questionText: 'เมื่อมีเพื่อนมาเสนอไอเดียธุรกิจใหม่ๆ หรือความฝันล้ำๆ สิ่งแรกที่คุณจะตอบสนองคือ...',
+    optionA: { text: 'วิเคราะห์ความจริง จุดเสี่ยง และความเป็นไปได้ในทางปฏิบัติของแผนนั้น', weight: 'T' },
+    optionB: { text: 'ตื่นเต้นไปกับไอเดีย ชื่นชมในความกล้าคิด และคอยให้กำลังใจสนับสนุนเต็มที่', weight: 'F' }
+  },
+  // J vs P (Additional)
+  {
+    id: 19,
+    dimension: 'JP',
+    questionText: 'คุณจัดการกับตารางชีวิตประจำวันและการทำงานในแต่ละวันอย่างไร?',
+    optionA: { text: 'จดลิสต์รายการสิ่งที่ต้องทำ (To-Do List) และกำหนดเวลากิจกรรมต่างๆ ชัดเจน', weight: 'J' },
+    optionB: { text: 'ปล่อยไปตามสเต็ปธรรมชาติ ยืดหยุ่นได้ตลอดเวลา มีอะไรเข้ามาค่อยแก้สถานการณ์', weight: 'P' }
+  },
+  {
+    id: 20,
+    dimension: 'JP',
+    questionText: 'หากเพื่อนสนิททักมาบอกกะทันหันว่า "อีก 30 นาทีเจอกัน ไปกินชาบูร้านโปรดกัน!" คุณจะ...',
+    optionA: { text: 'รู้สึกชะงักและอึดอัดใจเล็กน้อย เพราะไม่ได้วางแผนเดินทางหรือเตรียมตัวไว้ก่อน', weight: 'J' },
+    optionB: { text: 'ตื่นเต้นและดีใจ รีบแต่งตัวออกจากบ้านทันทีพร้อมลุยของอร่อย', weight: 'P' }
   }
 ];
 
@@ -334,17 +394,26 @@ const results = {
   }
 };
 
+// Helper function to shuffle array (Fisher-Yates)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 // 3. Application State Variables
 let currentQuestionIndex = 0;
-let selectedAnswers = new Array(questions.length).fill(null);
+let selectedAnswers = [];
 let tempSelection = null;
 let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 let loadingInterval = null;
 
 // 4. Navigation & State Controllers
 function startQuiz() {
+  shuffleArray(questions);
   currentQuestionIndex = 0;
-  selectedAnswers.fill(null);
+  selectedAnswers = new Array(questions.length).fill(null);
   tempSelection = null;
   scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
   
@@ -512,7 +581,7 @@ function calculateAndShowResult() {
   const profile = results[mbtiResult];
   
   // Inject result values
-  document.getElementById('result-mbti').innerText = profile.mbti;
+  // document.getElementById('result-mbti').innerText = profile.mbti;
   document.getElementById('result-breed-title').innerText = profile.breed;
   
   // Try loading local image, fallback to emoji on failure
@@ -560,7 +629,7 @@ function calculateAndShowResult() {
   
   // Best Match Inject
   document.getElementById('result-best-name').innerText = bestProfile.breed.split(' (')[0];
-  document.getElementById('result-best-mbti').innerText = bestProfile.mbti.split(' (')[0];
+  // document.getElementById('result-best-mbti').innerText = bestProfile.mbti.split(' (')[0];
   document.getElementById('result-best-emoji').innerText = bestProfile.emoji;
   
   const bestImg = document.getElementById('result-best-image');
@@ -585,7 +654,7 @@ function calculateAndShowResult() {
   
   // Worst Match Inject
   document.getElementById('result-worst-name').innerText = worstProfile.breed.split(' (')[0];
-  document.getElementById('result-worst-mbti').innerText = worstProfile.mbti.split(' (')[0];
+  // document.getElementById('result-worst-mbti').innerText = worstProfile.mbti.split(' (')[0];
   document.getElementById('result-worst-emoji').innerText = worstProfile.emoji;
   
   const worstImg = document.getElementById('result-worst-image');
@@ -633,7 +702,7 @@ function showCompanionDetail(mbtiCode) {
   const comp = results[mbtiCode];
   if (!comp) return;
   
-  const detailText = `🐾 ${comp.breed}\n💡 ${comp.mbti}\n\nนิสัยเด่น:\n- ${comp.traits[0]}\n- ${comp.traits[1]}`;
+  const detailText = `🐾 ${comp.breed}\n\nนิสัยเด่น:\n- ${comp.traits[0]}\n- ${comp.traits[1]}`;
   showToast(comp.emoji + ' ' + comp.breed.split(' (')[0] + ': ' + comp.tags.join(' '));
   
   alert(detailText);
@@ -659,6 +728,72 @@ function shareResult() {
     }
     document.body.removeChild(textArea);
   });
+}
+
+function downloadResultImage() {
+  const captureArea = document.getElementById('result-capture-area');
+  if (!captureArea) return;
+  
+  showToast('กำลังเตรียมดาวน์โหลดรูปภาพ... 📸');
+  
+  // Create wrapper container
+  const wrapper = document.createElement('div');
+  wrapper.style.position = 'fixed';
+  wrapper.style.left = '-9999px';
+  wrapper.style.top = '0';
+  wrapper.style.width = '500px';
+  wrapper.style.padding = '24px';
+  wrapper.style.background = 'linear-gradient(135deg, #FFEBEB 0%, #FFF3E3 50%, #F0F3FF 100%)';
+  wrapper.style.boxSizing = 'border-box';
+  
+  // Clone the result area
+  const card = captureArea.cloneNode(true);
+  card.style.backgroundColor = '#FFFFFF';
+  card.style.padding = '28px';
+  card.style.borderRadius = '24px';
+  card.style.boxShadow = '0 10px 30px rgba(244,63,94,0.06)';
+  card.style.border = '1px solid rgba(244,63,94,0.08)';
+  card.style.boxSizing = 'border-box';
+  
+  // Add a nice watermark at the bottom of the white card
+  const watermark = document.createElement('div');
+  watermark.className = "text-center text-xs text-slate-400 font-semibold pt-5 mt-4 border-t border-slate-100 font-['Mitr'] flex items-center justify-center gap-1";
+  watermark.innerHTML = '<span>🐾</span> CatIdentity Quiz • mbti.catidentity.com';
+  card.appendChild(watermark);
+  
+  wrapper.appendChild(card);
+  document.body.appendChild(wrapper);
+  
+  // Give it a brief moment to render styles
+  setTimeout(() => {
+    html2canvas(wrapper, {
+      useCORS: true,
+      scale: 2, // High resolution (retina support)
+      logging: false,
+      allowTaint: true
+    }).then(canvas => {
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      
+      const breedTitle = document.getElementById('result-breed-title').innerText.trim();
+      // Strip emojis and spaces for clean filename
+      const cleanBreedName = breedTitle.replace(/[^\w\u0E00-\u0E7F\s-]/g, '').trim().replace(/\s+/g, '_');
+      const filename = `CatIdentity_${cleanBreedName}.png`;
+      
+      link.download = filename;
+      link.href = dataUrl;
+      link.click();
+      
+      document.body.removeChild(wrapper);
+      showToast('ดาวน์โหลดรูปภาพสำเร็จแล้ว! 🐾');
+    }).catch(err => {
+      console.error('Error generating image:', err);
+      if (document.body.contains(wrapper)) {
+        document.body.removeChild(wrapper);
+      }
+      showToast('เกิดข้อผิดพลาดในการบันทึกรูปภาพ 😿');
+    });
+  }, 150);
 }
 
 function showToast(message) {

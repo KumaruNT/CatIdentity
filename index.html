@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>แบบทดสอบทายใจ: คุณคือแมวพันธุ์อะไร? 🐾</title>
   <!-- SEO Meta Tags -->
-  <meta name="description" content="ทำแบบทดสอบบุคลิกภาพ 12 ข้อ เพื่อค้นหาว่าคุณคือแมวสายพันธุ์ไหนจาก 16 สายพันธุ์ พร้อมเช็กความเข้ากันได้กับแมวพันธุ์อื่นๆ!">
+  <meta name="description" content="ทำแบบทดสอบบุคลิกภาพ 20 ข้อ เพื่อค้นหาว่าคุณคือแมวสายพันธุ์ไหนจาก 16 สายพันธุ์ พร้อมเช็กความเข้ากันได้กับแมวพันธุ์อื่นๆ!">
   <meta property="og:title" content="แบบทดสอบทายใจ: คุณคือแมวพันธุ์อะไร? 🐾">
-  <meta property="og:description" content="ทำแบบทดสอบบุคลิกภาพ 12 ข้อ เพื่อค้นหาว่าคุณคือแมวสายพันธุ์ไหนจาก 16 สายพันธุ์!">
+  <meta property="og:description" content="ทำแบบทดสอบบุคลิกภาพ 20 ข้อ เพื่อค้นหาว่าคุณคือแมวสายพันธุ์ไหนจาก 16 สายพันธุ์!">
   <meta property="og:type" content="website">
   
   <!-- Google Fonts for Thai support: Mitr (headings) and Itim (playful body) -->
@@ -17,6 +17,8 @@
   
   <!-- Tailwind CSS v4 CDN -->
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <!-- html2canvas CDN for taking screenshots -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     body {
@@ -72,7 +74,7 @@
       <span class="font-bold text-xl tracking-wide text-rose-500 font-['Mitr']">CatIdentity</span>
     </div>
     <div class="text-sm bg-white/60 px-3 py-1 rounded-full border border-pink-100 shadow-sm text-rose-600 font-medium">
-      MBTI 16 สายพันธุ์
+      16 สายพันธุ์เหมียว
     </div>
   </header>
 
@@ -177,83 +179,87 @@
 
       <!-- 4. RESULT VIEW (Initially Hidden) -->
       <div id="view-result" class="hidden flex flex-col flex-grow space-y-6 animate-[fadeIn_0.5s_ease-out]">
-        <!-- Top Profile Info -->
-        <div class="text-center space-y-3">
-          <span id="result-mbti" class="inline-block px-4 py-1.5 bg-rose-50 text-rose-600 border border-rose-100 font-extrabold text-sm rounded-full tracking-wider font-['Mitr'] uppercase">
-            ISFP (นักผจญภัย)
-          </span>
-          <h2 class="text-slate-500 font-medium text-lg">เหมียวเวอร์ชันที่เป็นคุณคือ...</h2>
-          <h1 id="result-breed-title" class="text-3xl md:text-4xl font-extrabold text-slate-800 font-['Mitr'] leading-tight">
-            แมวส้ม (Orange Tabby) 🍊
-          </h1>
-        </div>
-
-        <!-- Custom Cat Illustration / Emoji Box -->
-        <div class="flex justify-center py-2">
-          <div class="w-40 h-40 bg-gradient-to-tr from-pink-100 to-amber-100 rounded-2xl border-4 border-white shadow-lg flex items-center justify-center relative overflow-hidden">
-            <img id="result-cat-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="cat illustration" onerror="onCatImageError(this)">
+        
+        <!-- Capture Area (For screenshot download) -->
+        <div id="result-capture-area" class="flex flex-col space-y-6">
+          <!-- Top Profile Info -->
+          <div class="text-center space-y-3">
+            <span id="result-mbti" class="hidden">
+              ISFP (นักผจญภัย)
+            </span>
+            <h2 class="text-slate-500 font-medium text-lg">เหมียวเวอร์ชันที่เป็นคุณคือ...</h2>
+            <h1 id="result-breed-title" class="text-3xl md:text-4xl font-extrabold text-slate-800 font-['Mitr'] leading-tight">
+              แมวส้ม (Orange Tabby) 🍊
+            </h1>
           </div>
-        </div>
 
-        <!-- Personality Traits Tags -->
-        <div id="result-tags" class="flex flex-wrap justify-center gap-2">
-          <span class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-sm font-semibold">#รักอิสระ</span>
-          <span class="px-3 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-sm font-semibold">#ชิลเก่ง</span>
-          <span class="px-3 py-1 bg-rose-50 text-rose-700 border border-rose-100 rounded-full text-sm font-semibold">#อารมณ์ศิลปิน</span>
-        </div>
-
-        <!-- Personality Details -->
-        <div class="bg-white/90 rounded-2xl p-5 border border-slate-100 space-y-4 shadow-sm">
-          <h3 class="font-bold text-lg text-slate-800 border-b border-slate-100 pb-2 font-['Mitr'] flex items-center gap-2">
-            <span>✨</span> ลักษณะนิสัยของเหมียว
-          </h3>
-          <ul id="result-desc-list" class="space-y-2.5 text-slate-600 text-sm md:text-base leading-relaxed list-none pl-0">
-            <!-- Dynamic bullets go here -->
-          </ul>
-        </div>
-
-        <!-- Compatibility Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Best Match -->
-          <div id="btn-best-match" class="bg-emerald-50/50 border border-emerald-100/80 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:bg-emerald-50 transition-all duration-300 shadow-sm hover:shadow">
-            <div class="text-emerald-800 font-bold text-sm mb-2 font-['Mitr'] flex items-center gap-1.5">
-              <span class="text-base">💖</span> เพื่อนซี้เคมีเข้ากันได้ดีที่สุด
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-emerald-100 shadow-sm relative">
-                <img id="result-best-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="best cat" onerror="onCompanionImageError(this, 'result-best-emoji')">
-                <span id="result-best-emoji" class="text-2xl">🦁</span>
-              </div>
-              <div>
-                <div id="result-best-name" class="font-bold text-slate-800 text-sm font-['Mitr']">แมวเมนคูน</div>
-                <div id="result-best-mbti" class="text-xs text-slate-500 uppercase font-semibold">ESFJ</div>
-              </div>
+          <!-- Custom Cat Illustration / Emoji Box -->
+          <div class="flex justify-center py-2">
+            <div class="w-40 h-40 bg-gradient-to-tr from-pink-100 to-amber-100 rounded-2xl border-4 border-white shadow-lg flex items-center justify-center relative overflow-hidden">
+              <img id="result-cat-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="cat illustration" onerror="onCatImageError(this)">
             </div>
           </div>
 
-          <!-- Worst Match -->
-          <div id="btn-worst-match" class="bg-rose-50/50 border border-rose-100/80 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:bg-rose-50 transition-all duration-300 shadow-sm hover:shadow">
-            <div class="text-rose-800 font-bold text-sm mb-2 font-['Mitr'] flex items-center gap-1.5">
-              <span class="text-base">⚡</span> ไม่ค่อยถูกกัน/อาจมีเขม่น
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-rose-100 shadow-sm relative">
-                <img id="result-worst-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="worst cat" onerror="onCompanionImageError(this, 'result-worst-emoji')">
-                <span id="result-worst-emoji" class="text-2xl">😼</span>
+          <!-- Personality Traits Tags -->
+          <div id="result-tags" class="flex flex-wrap justify-center gap-2">
+            <span class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-sm font-semibold">#รักอิสระ</span>
+            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-sm font-semibold">#ชิลเก่ง</span>
+            <span class="px-3 py-1 bg-rose-50 text-rose-700 border border-rose-100 rounded-full text-sm font-semibold">#อารมณ์ศิลปิน</span>
+          </div>
+
+          <!-- Personality Details -->
+          <div class="bg-white/90 rounded-2xl p-5 border border-slate-100 space-y-4 shadow-sm">
+            <h3 class="font-bold text-lg text-slate-800 border-b border-slate-100 pb-2 font-['Mitr'] flex items-center gap-2">
+              <span>✨</span> ลักษณะนิสัยของเหมียว
+            </h3>
+            <ul id="result-desc-list" class="space-y-2.5 text-slate-600 text-sm md:text-base leading-relaxed list-none pl-0">
+              <!-- Dynamic bullets go here -->
+            </ul>
+          </div>
+
+          <!-- Compatibility Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Best Match -->
+            <div id="btn-best-match" class="bg-emerald-50/50 border border-emerald-100/80 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:bg-emerald-50 transition-all duration-300 shadow-sm hover:shadow">
+              <div class="text-emerald-800 font-bold text-sm mb-2 font-['Mitr'] flex items-center gap-1.5">
+                <span class="text-base">💖</span> เพื่อนซี้เคมีเข้ากันได้ดีที่สุด
               </div>
-              <div>
-                <div id="result-worst-name" class="font-bold text-slate-800 text-sm font-['Mitr']">แมวสยาม</div>
-                <div id="result-worst-mbti" class="text-xs text-slate-500 uppercase font-semibold">ENTJ</div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-emerald-100 shadow-sm relative">
+                  <img id="result-best-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="best cat" onerror="onCompanionImageError(this, 'result-best-emoji')">
+                  <span id="result-best-emoji" class="text-2xl">🦁</span>
+                </div>
+                <div>
+                  <div id="result-best-name" class="font-bold text-slate-800 text-sm font-['Mitr']">แมวเมนคูน</div>
+                  <div id="result-best-mbti" class="hidden text-xs text-slate-500 uppercase font-semibold">ESFJ</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Worst Match -->
+            <div id="btn-worst-match" class="bg-rose-50/50 border border-rose-100/80 rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:bg-rose-50 transition-all duration-300 shadow-sm hover:shadow">
+              <div class="text-rose-800 font-bold text-sm mb-2 font-['Mitr'] flex items-center gap-1.5">
+                <span class="text-base">⚡</span> ไม่ค่อยถูกกัน/อาจมีเขม่น
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden border border-rose-100 shadow-sm relative">
+                  <img id="result-worst-image" class="w-full h-full object-cover hidden" style="object-fit: cover;" src="" alt="worst cat" onerror="onCompanionImageError(this, 'result-worst-emoji')">
+                  <span id="result-worst-emoji" class="text-2xl">😼</span>
+                </div>
+                <div>
+                  <div id="result-worst-name" class="font-bold text-slate-800 text-sm font-['Mitr']">แมวสยาม</div>
+                  <div id="result-worst-mbti" class="hidden text-xs text-slate-500 uppercase font-semibold">ENTJ</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> <!-- End of Capture Area -->
 
         <!-- Actions -->
         <div class="flex flex-col sm:flex-row gap-3 pt-2">
-          <!-- Share -->
-          <button onclick="shareResult()" class="flex-1 py-3 px-6 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer font-['Mitr'] flex items-center justify-center gap-2">
-            <span>🔗</span> แชร์ผลลัพธ์
+          <!-- Save Image -->
+          <button onclick="downloadResultImage()" class="flex-1 py-3 px-6 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer font-['Mitr'] flex items-center justify-center gap-2">
+            <span>📸</span> บันทึกรูปภาพ
           </button>
           
           <!-- Play Again -->
