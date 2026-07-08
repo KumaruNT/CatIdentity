@@ -772,7 +772,19 @@ function downloadResultImage() {
   
   // Give it a brief moment to render styles
   setTimeout(() => {
-    html2canvas(wrapper, {
+    // html2canvas-pro UMD build exports an object containing the default function
+    const h2c = (typeof html2canvas === 'function') ? html2canvas : (window.html2canvas?.default || window.html2canvas?.html2canvas);
+    
+    if (typeof h2c !== 'function') {
+      console.error('html2canvas library is not loaded or invalid:', window.html2canvas);
+      showToast('ไม่พบไลบรารี html2canvas ในระบบ 😿');
+      if (document.body.contains(wrapper)) {
+        document.body.removeChild(wrapper);
+      }
+      return;
+    }
+
+    h2c(wrapper, {
       useCORS: false, // Set to false to avoid local stylesheet CORS blocks on file:// protocol
       scale: 2, // High resolution (retina support)
       logging: true, // Enable logging for debugging

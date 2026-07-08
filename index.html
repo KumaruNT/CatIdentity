@@ -18,7 +18,21 @@
   <!-- Tailwind CSS v4 CDN -->
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <!-- html2canvas-pro CDN for taking screenshots (supports Tailwind CSS v4 oklch colors) -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@latest/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@latest/dist/html2canvas-pro.min.js"></script>
+
+  <script>
+    // Early definitions of image error fallbacks to avoid console errors before app.js loads
+    window.onCatImageError = function(img) {
+      img.classList.add('hidden');
+      const emoji = document.getElementById('result-cat-emoji');
+      if (emoji) emoji.classList.remove('hidden');
+    };
+    window.onCompanionImageError = function(img, emojiId) {
+      img.classList.add('hidden');
+      const emoji = document.getElementById(emojiId);
+      if (emoji) emoji.classList.remove('hidden');
+    };
+  </script>
 
   <style>
     body {
