@@ -408,6 +408,7 @@ let selectedAnswers = [];
 let tempSelection = null;
 let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 let loadingInterval = null;
+let isTransitioning = false;
 
 // 4. Navigation & State Controllers
 function startQuiz() {
@@ -429,6 +430,9 @@ function startQuiz() {
 function showQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
   
+  // Reset transitioning state
+  isTransitioning = false;
+
   // Update progress elements
   const progressPercent = Math.round((currentQuestionIndex / questions.length) * 100);
   document.getElementById('quiz-question-number').innerText = `คำถามที่ ${currentQuestionIndex + 1} จาก ${questions.length}`;
@@ -453,15 +457,13 @@ function showQuestion() {
   // Reset style of option buttons
   resetOptionButtonStyles();
   
-  // Disable Next button by default unless restoring previous choice
-  const nextBtn = document.getElementById('quiz-btn-next');
+  // Restore saved answer if it exists
   const savedAnswer = selectedAnswers[currentQuestionIndex];
   if (savedAnswer) {
-    selectOption(savedAnswer);
+    tempSelection = savedAnswer;
+    highlightOption(savedAnswer);
   } else {
     tempSelection = null;
-    nextBtn.disabled = true;
-    nextBtn.className = "w-full sm:w-auto py-3.5 px-10 bg-slate-200 text-slate-400 font-bold text-lg rounded-2xl shadow-inner cursor-not-allowed transition-all duration-300 font-['Mitr'] flex items-center justify-center gap-2";
   }
 }
 
@@ -478,14 +480,11 @@ function resetOptionButtonStyles() {
   badgeB.className = "w-10 h-10 min-w-[40px] rounded-full bg-slate-100 group-hover:bg-rose-500 group-hover:text-white flex items-center justify-center text-lg font-bold font-['Mitr'] text-slate-600 transition-colors duration-300";
 }
 
-function selectOption(option) {
-  tempSelection = option;
-  
+function highlightOption(option) {
   const optA = document.getElementById('quiz-option-a');
   const optB = document.getElementById('quiz-option-b');
   const badgeA = document.getElementById('quiz-option-a-badge');
   const badgeB = document.getElementById('quiz-option-b-badge');
-  const nextBtn = document.getElementById('quiz-btn-next');
   
   // Clear styles first
   resetOptionButtonStyles();
@@ -498,29 +497,32 @@ function selectOption(option) {
     optB.className = "w-full text-left p-5 md:p-6 bg-rose-50/50 border-2 border-rose-400 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer flex items-center gap-4 group";
     badgeB.className = "w-10 h-10 min-w-[40px] rounded-full bg-rose-500 text-white flex items-center justify-center text-lg font-bold font-['Mitr'] transition-colors duration-300";
   }
-  
-  // Enable Next button with active cute style
-  nextBtn.disabled = false;
-  nextBtn.className = "w-full sm:w-auto py-3.5 px-10 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-lg rounded-2xl shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/60 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer transition-all duration-300 font-['Mitr'] flex items-center justify-center gap-2";
 }
 
-function goToNextQuestion() {
-  if (!tempSelection) return;
+function selectOption(option) {
+  if (isTransitioning) return;
+  isTransitioning = true;
+  
+  tempSelection = option;
+  highlightOption(option);
   
   // Record choice for current question
-  selectedAnswers[currentQuestionIndex] = tempSelection;
+  selectedAnswers[currentQuestionIndex] = option;
   
-  currentQuestionIndex++;
-  
-  if (currentQuestionIndex < questions.length) {
-    showQuestion();
-  } else {
-    // Finished all questions, calculate and load result screen
-    showLoadingScreen();
-  }
+  // Small delay for visual feedback before automatically going to the next question
+  setTimeout(() => {
+    currentQuestionIndex++;
+    isTransitioning = false;
+    if (currentQuestionIndex < questions.length) {
+      showQuestion();
+    } else {
+      showLoadingScreen();
+    }
+  }, 200);
 }
 
 function goToPreviousQuestion() {
+  if (isTransitioning) return;
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     showQuestion();
@@ -694,6 +696,7 @@ function resetQuiz() {
   tempSelection = null;
   scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
   if (loadingInterval) clearInterval(loadingInterval);
+  isTransitioning = false;
   
   document.getElementById('view-quiz').classList.add('hidden');
   document.getElementById('view-loading').classList.add('hidden');
